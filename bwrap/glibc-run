@@ -2,11 +2,6 @@
 
 CHROOT="/mnt/glibc"
 
-if [ -z "$1" ]; then
-    echo "Ошибка: Не указано приложение для запуска."
-    echo "Использование: glibc-run /путь/к/бинарнику [аргументы]"
-    exit 1
-fi
 
 APP_NAME=$(basename "$1")
 APP_HOME="${HOME}/.local/share/glibc_sandbox/${APP_NAME}"
