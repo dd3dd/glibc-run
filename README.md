@@ -31,6 +31,31 @@ This repository offers two independent implementations depending on your philoso
 
 ---
 
+ ## 🧪 Verified Applications
+
+## This setup has been successfully tested on Gentoo (Musl/LLVM) for:
+
+    Steam
+
+    Discord
+
+    Obsidian
+
+    Prism Launcher
+
+Note: Since this tool is environment-agnostic, it should work with any compatible glibc-based rootfs.
+⚠️ Status & Contributing
+
+This project is currently my daily driver.
+
+##    Tested on: Gentoo (Musl/LLVM).
+
+##    Other distributions: It should work on any Linux distribution with bwrap/unshare. If you encounter issues on your distro, feel free to open an issue or submit a Pull Request!
+
+Feedback and PRs are very welcome.
+
+---
+
 ## 📂 Repository Structure
 
 ```text
