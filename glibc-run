@@ -1,0 +1,49 @@
+#!/bin/sh
+
+CHROOT="/mnt/glibc"
+
+if [ -z "$1" ]; then
+    echo "Ошибка: Не указано приложение для запуска."
+    echo "Использование: glibc-run /путь/к/бинарнику [аргументы]"
+    exit 1
+fi
+
+APP_NAME=$(basename "$1")
+APP_HOME="${HOME}/.local/share/glibc_sandbox/${APP_NAME}"
+
+mkdir -p "$APP_HOME/.config" "$APP_HOME/.local/share" "$APP_HOME/Downloads"
+
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+    XDG_RUNTIME_DIR="/run/user/$(id -u)"
+fi
+
+exec bwrap \
+  --unshare-all \
+  --share-net \
+  --cap-drop ALL \
+  --ro-bind "$CHROOT" / \
+  --proc /proc \
+  --dev /dev \
+  --ro-bind /sys /sys \
+  --dev-bind /dev/dri /dev/dri \
+  --dev-bind /dev/shm /dev/shm \
+  --dev-bind /dev/input /dev/input \
+  --dev-bind-try /dev/uinput /dev/uinput \
+  --ro-bind /etc/resolv.conf /etc/resolv.conf \
+  --tmpfs /tmp \
+  --bind /tmp/.X11-unix /tmp/.X11-unix \
+  --bind "$XDG_RUNTIME_DIR" "$XDG_RUNTIME_DIR" \
+  --bind /run/dbus /run/dbus \
+  --bind "$APP_HOME" /home/user \
+  --ro-bind-try "$HOME/.Xauthority" /home/user/.Xauthority \
+  --setenv USER user \
+  --setenv HOME /home/user \
+  --setenv DISPLAY "$DISPLAY" \
+  --setenv WAYLAND_DISPLAY "$WAYLAND_DISPLAY" \
+  --setenv XAUTHORITY /home/user/.Xauthority \
+  --setenv XDG_RUNTIME_DIR "$XDG_RUNTIME_DIR" \
+  --setenv PIPEWIRE_RUNTIME_DIR "$XDG_RUNTIME_DIR" \
+  --setenv PULSE_RUNTIME_DIR "$XDG_RUNTIME_DIR" \
+  --setenv PATH /usr/local/bin:/usr/bin:/bin \
+  --chdir /home/user \
+  dbus-launch --exit-with-session "$@"
