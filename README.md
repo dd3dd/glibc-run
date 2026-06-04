@@ -2,7 +2,7 @@
 
 > ⚠️ **DISCLAIMER:** This is my personal script written for a specific setup (Gentoo Musl + LLVM). Paths like `/mnt/glibc` are hardcoded for my system. This script is shared purely for reference or as a starting point for your own custom solutions. I DO NOT guarantee that it will work on Void, Alpine, or Chimera without manually tweaking the paths. No complaints accepted, but pull requests are welcome!
 
-A collection of lightweight, high-performance solutions designed to run Glibc binaries (including Steam, modern games, and clients like AyuGram) seamlessly on Musl-based Linux distributions (such as Gentoo, Void, or Alpine Linux) without relying on heavy Flatpaks.
+A collection of lightweight, high-performance solutions designed to run Glibc binaries (including Steam, modern games) seamlessly on Musl-based Linux distributions (such as Gentoo, Void, or Alpine Linux) without relying on heavy Flatpaks.
 
 ---
 
