@@ -28,7 +28,7 @@ exec bwrap \
   --tmpfs /tmp \
   --bind /tmp/.X11-unix /tmp/.X11-unix \
   --bind "$XDG_RUNTIME_DIR" "$XDG_RUNTIME_DIR" \
-  --bind /run/dbus /run/dbus \
+  --bind-try /run/dbus /run/dbus \
   --bind "$APP_HOME" /home/user \
   --ro-bind-try "$HOME/.Xauthority" /home/user/.Xauthority \
   --setenv USER user \
